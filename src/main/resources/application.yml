@@ -1,0 +1,71 @@
+server:
+  port: 8000
+---
+api:
+  authentication:
+    enabled: true
+---
+# this is for simple version of Oauth2 authentication.
+#security.oauth2 not being used, it is only for @EnableOauth2Sso is in place
+security:
+  oauth2:
+    client:
+      clientId: 39b9339aec47254d2955
+      clientSecret: cdc58db96373b465b8cccdac3026a983a9bb66ce
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://api.github.com/user
+---
+# this is being loaded in SecurityConfig when @EnableOAuth2Client is being used
+github:
+  client:
+    clientId: 39b9339aec47254d2955
+    clientSecret: cdc58db96373b465b8cccdac3026a983a9bb66ce
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user
+---
+###
+#   Database Settings
+#   Database: H2
+#   Console: http://localhost:8000/console
+#   console enabled when h2.console.enabled=true
+#   when application starts up it will automatically run schema.sql
+#   As the ddl-auto=none, it will also run data.sql to load the initial data
+#   the show_sql=true to display the actual sql statement involved
+###
+spring:
+  application:
+    name: displaytransact
+  datasource:
+    url: jdbc:h2:mem:example-app;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
+###
+#   H2 Settings
+###
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
