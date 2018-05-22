@@ -53,6 +53,10 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Timed
     public TransactionDetail addOrReplace(TransactionDetail transactionDetail) {
+        if(transactionDetail.getId()==null){
+            // when adding a new entry, id cannot be null
+            transactionDetail.setId(0L);
+        }
         TransactionDetailDbo transactionDetailDbo = ObjectMapper.toDbo(transactionDetail);
         transactionDetailDbo = transactionDetailRepository.save(transactionDetailDbo);
         return ObjectMapper.fromDbo(transactionDetailDbo);

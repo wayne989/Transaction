@@ -23,7 +23,7 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     Logger errorLogger = TransactionServiceLogger.getErrorLogger();
 
     /**
-     * this is to handle the particular InvalidJSONFormatException when it is thrown from
+     * this is to handle the particular NumberFormatException when it is thrown from
      * controller
      * @param ex
      * @param req
@@ -34,21 +34,6 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
         HashMap<String, String> errorMap = new HashMap<String,String>();
         errorMap.put("Invalid numeric format", ex.getMessage());
         errorLogger.error("error=" + "Invalid JSON String: " + ex.getMessage());
-        return new ResponseEntity<HashMap>(errorMap, HttpStatus.BAD_REQUEST);
-    }
-
-    /**
-     * this is to handle the particular InvalidJSONFormatException when it is thrown from
-     * controller
-     * @param ex
-     * @param req
-     * @return
-     */
-    @ExceptionHandler(InvalidJSONFormatException.class)
-    public final ResponseEntity<HashMap> handleInvalidJSONFormatException(InvalidJSONFormatException ex, WebRequest req){
-        HashMap<String, String> errorMap = new HashMap<String,String>();
-        errorMap.put("Invalid JSON String", ex.getInvalidJsonStr());
-        errorLogger.error("error=" + "Invalid JSON String: " + ex.getInvalidJsonStr());
         return new ResponseEntity<HashMap>(errorMap, HttpStatus.BAD_REQUEST);
     }
 }

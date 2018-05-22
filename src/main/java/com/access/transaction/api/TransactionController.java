@@ -4,7 +4,10 @@ import com.access.transaction.domain.model.TransactionDetail;
 import com.access.transaction.domain.model.TransactionItem;
 import com.access.transaction.domain.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,9 @@ import java.util.Map;
 public class TransactionController{
     @Autowired
     private TransactionService transactionService;
+
+    @Value("${api.authentication.enabled}")
+    boolean apiAuthenticationEnabled;
 
     @GetMapping(value="/transaction/list", produces={"application/json"})
     @ResponseStatus(HttpStatus.OK)
@@ -52,7 +58,22 @@ public class TransactionController{
     @ResponseStatus(HttpStatus.OK)
     public Map<String,String> user(Principal principal) {
         Map<String, String> map = new LinkedHashMap<String, String>();
-        map.put("name", principal.getName());
+        if(principal!=null){
+            map.put("name", principal.getName());
+            if(principal instanceof Authentication){
+                Authentication authentication = (Authentication) principal;
+                map.put("authenticated", String.valueOf(authentication.isAuthenticated()));
+            }else{
+                map.put("authenticated", String.valueOf(false));
+            }
+        }else{
+            map.put("name", "");
+            map.put("authenticated", String.valueOf(false));
+        }
+        if(!apiAuthenticationEnabled) {
+            map.put("name", "AlwaysAuthenticated");
+            map.put("authenticated", String.valueOf(true));
+        }
         return map;
     }
 }

@@ -50,7 +50,9 @@ public class LoggingPointcutConfig {
     private static String convertArgsToString(Object[] signatureArgs){
         String signatureStr = "";
         for(Object signatureArg: signatureArgs){
-            signatureStr = signatureStr + signatureArg.toString() + ", ";
+            if(signatureArg!=null) {
+                signatureStr = signatureStr + signatureArg.toString() + ", ";
+            }
         }
         int commaPosition = signatureStr.lastIndexOf(",");
         if( signatureStr.length() >= 2 && commaPosition > -1){
