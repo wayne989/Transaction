@@ -1,7 +1,7 @@
 # Transaction
 A web application to render the provided transaction list
 
-##Summary:
+## Summary:
 
     This is a simple application to demostrate Spring Boot for REST API and Angular UI Front End
     The Spring Boot have security feature setup to require user to login with GitHub account
@@ -22,7 +22,7 @@ A web application to render the provided transaction list
     please note this service has configured to port 8000, the localhost:8000 is registered with GitHub
     for Oauth2
     
-##Build and Deploy
+## Build and Deploy
 
     this requires JDK 1.8 or above
     using Gradle build file build.gradle
@@ -31,7 +31,7 @@ A web application to render the provided transaction list
     the above command will generate an excutable jar, which allows to deploy into different platform
     like cloud, docker or run as standalone by the following run command
     
-##Run:
+## Run:
     
     this requires JDK 1.8 or above    
     assume Transaction is your project folder
@@ -39,7 +39,7 @@ A web application to render the provided transaction list
     cd Transaction/build/libs
     java -jar transaction-0.0.1-SNAPSHOT.jar
     
-##IDE:
+## IDE:
 
     Initially developed with IntelliJ IDEA, but Eclipse or Spring IDE will be fine.
     
