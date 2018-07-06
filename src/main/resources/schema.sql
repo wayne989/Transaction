@@ -1,3 +1,4 @@
+drop table if exists transaction;
 create table transaction (
   id identity auto_increment not null,
   transaction_date date not null,
