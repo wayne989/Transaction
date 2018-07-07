@@ -22,12 +22,19 @@ A web application to render the provided transaction list
     please note this service has configured to port 8000, the localhost:8000 is registered with GitHub
     for Oauth2
     
+    source folder:
+        Java: src/main/java
+        Angular: angular/src/app
+        Static Content: src/main;resources/static
+    
 ## Build and Deploy
 
     this requires JDK 1.8 or above
     using Gradle build file build.gradle
     cd project folder
-    build command: ./gradlew clean build
+    build services only and package: ./gradlew clean build
+    build angular UI only: ./buildUI.sh
+    build angular UI and build services then package into a jar: ./buildAll.sh
     the above command will generate an excutable jar, which allows to deploy into different platform
     like cloud, docker or run as standalone by the following run command
     
